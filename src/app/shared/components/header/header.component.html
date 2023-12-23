@@ -1,1 +1,19 @@
-<app-user class="h-12"></app-user>
+<header class="w-full h-16 bg-zinc-800 flex items-center px-4 fixed">
+  <button
+    mat-button
+    [mat-menu-trigger-for]="menu"
+    class="w-12 h-12 rounded-full bg-violet-700"
+  ></button>
+
+  <mat-menu class="w-48 bg-zinc-500 rounded-lg text-sm" #menu>
+    <button mat-menu-item>
+      <mat-icon>check</mat-icon>
+      <span>Tasks</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</header>

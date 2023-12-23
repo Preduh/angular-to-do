@@ -1,10 +1,11 @@
 import { Component } from '@angular/core'
-import { UserComponent } from './user/user.component'
+import { MatIconModule } from '@angular/material/icon'
+import { MatMenuModule } from '@angular/material/menu'
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [UserComponent],
+  imports: [MatMenuModule, MatIconModule],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
