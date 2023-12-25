@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common'
-import { Component } from '@angular/core'
+import { Component, Input, inject } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
-import { HeaderService } from './header.service'
+import { AuthService } from '../../authentication/auth.service'
+import { Router } from '@angular/router'
+import { UserInterface } from '../../authentication/user.model'
 
 @Component({
   selector: 'app-header',
@@ -12,19 +14,17 @@ import { HeaderService } from './header.service'
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  userIsLogged: boolean = false
+  router = inject(Router)
+  authService = inject(AuthService)
+  user: UserInterface | null | undefined = undefined
 
-  constructor(private headerService: HeaderService) {
-    this.headerService.userIsLoggedUpdated.subscribe(value => {
-      this.userIsLogged = value
+  ngOnInit() {
+    this.authService.getCurrentUser().subscribe((user) => {
+      this.user = user
     })
   }
 
-  login(): void {
-    this.headerService.setUserIsLogged(true)
-  }
-
-  logout(): void {
-    this.headerService.setUserIsLogged(false)
+  logout() {
+    this.authService.logout()
   }
 }

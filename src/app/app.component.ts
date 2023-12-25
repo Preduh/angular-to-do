@@ -6,10 +6,7 @@ import { HeaderComponent } from './shared/components/header/header.component'
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent],
-  template: `
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-  `
+  template: `<router-outlet></router-outlet>`
 })
 export class AppComponent {
   title = 'angular-to-do'

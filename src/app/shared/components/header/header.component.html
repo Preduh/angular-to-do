@@ -1,7 +1,7 @@
 <header
   class="w-full h-16 bg-zinc-800 flex items-center px-4 fixed justify-end"
 >
-  <div *ngIf="userIsLogged" class="">
+  <div *ngIf="user">
     <button
       [mat-menu-trigger-for]="menu"
       class="w-12 h-12 rounded-full bg-violet-700 flex items-center justify-center"
@@ -10,6 +10,19 @@
     </button>
 
     <mat-menu class="w-48 bg-zinc-500 rounded-lg text-sm" #menu>
+      <div class="flex items-center">
+        <div class="px-3">
+          <div
+            class="w-12 h-12 rounded-full bg-violet-700 flex items-center justify-center"
+          >
+            <mat-icon class="dark:text-purple-300">person</mat-icon>
+          </div>
+        </div>
+        <h1 class="text-white text-lg">&#64;{{ user.username }}</h1>
+      </div>
+
+      <hr class="text-zinc-500 border-zinc-500 mt-2" />
+
       <button mat-menu-item>
         <mat-icon>check</mat-icon>
         <span>Tasks</span>
@@ -22,7 +35,8 @@
     </mat-menu>
   </div>
 
-  <div *ngIf="!userIsLogged" class="">
-    <button (click)="login()" mat-button>Sign in</button>
+  <div *ngIf="!user" class="">
+    <a href="/login" mat-button>Sign in</a>
+    <a href="/register" mat-button>Register</a>
   </div>
 </header>
