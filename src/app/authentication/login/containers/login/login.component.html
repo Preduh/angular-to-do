@@ -1,4 +1,46 @@
 <app-header></app-header>
-<div class="pt-32">
-  <button class="" (click)="onSubmit()" mat-raised-button>Sign in</button>
+<div class="w-full h-screen bg-zinc-900 pt-16 flex items-center justify-center">
+  <form [formGroup]="form" class="flex flex-col items-center justify-center">
+    <mat-form-field>
+      <input
+        formControlName="email"
+        placeholder="Email"
+        matInput
+        class=""
+        type="email"
+        name="email"
+        id="email"
+      />
+      <mat-error *ngIf="form.controls.email.hasError('email')"
+        >Please enter a valid email address</mat-error
+      >
+      <mat-error *ngIf="form.controls.email.hasError('required')"
+        >Email is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        formControlName="password"
+        placeholder="Password"
+        matInput
+        class=""
+        type="password"
+        name="password"
+        id="password"
+      />
+      <mat-error *ngIf="form.controls.password.hasError('required')"
+        >Password is required</mat-error
+      >
+    </mat-form-field>
+    <button
+      type="button"
+      class="w-full"
+      (click)="onSubmit()"
+      mat-raised-button
+      color="primary"
+    >
+      Login
+    </button>
+  </form>
 </div>

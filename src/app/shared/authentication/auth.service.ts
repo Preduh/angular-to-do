@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable, inject, signal } from '@angular/core'
 import { Router } from '@angular/router'
-import { UserInterface, UserResponseInterface } from './user.model'
+import {
+  UserInterface,
+  UserLoginRequestInterface,
+  UserResponseInterface
+} from './user.model'
 import { Subject } from 'rxjs'
 
 @Injectable({
@@ -17,12 +21,12 @@ export class AuthService {
     return this.currentUser.asObservable()
   }
 
-  login(): void {
+  login({ email, password }: UserLoginRequestInterface): void {
     this.http
       .post<UserResponseInterface>('https://api.realworld.io/api/users/login', {
         user: {
-          email: 'any@mail.com',
-          password: '123456'
+          email,
+          password
         }
       })
       .subscribe((response) => {
@@ -62,7 +66,7 @@ export class AuthService {
           this.currentUser.next(response.user)
         },
         error: () => {
-          this.currentUser.next(null)
+          this.logout()
         }
       })
   }
