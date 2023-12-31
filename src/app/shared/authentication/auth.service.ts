@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable, inject, signal } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { Router } from '@angular/router'
+import { Subject, Subscription } from 'rxjs'
+import { environment } from '../../../environments/environment'
 import {
   UserInterface,
   UserLoginRequestInterface,
   UserResponseInterface
 } from './user.model'
-import { Subject } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -21,24 +22,29 @@ export class AuthService {
     return this.currentUser.asObservable()
   }
 
-  login({ email, password }: UserLoginRequestInterface): void {
+  login({ email, password }: UserLoginRequestInterface): any {
     this.http
-      .post<UserResponseInterface>('https://api.realworld.io/api/users/login', {
+      .post<UserResponseInterface>(`${environment.baseApiUrl}/users/login`, {
         user: {
           email,
           password
         }
       })
-      .subscribe((response) => {
-        localStorage.setItem('angular-to-do.token', response.user.token)
-        this.currentUser.next(response.user)
-        this.router.navigateByUrl('/')
+      .subscribe({
+        next: (response) => {
+          localStorage.setItem('angular-to-do.token', response.user.token)
+          this.currentUser.next(response.user)
+          this.router.navigateByUrl('/')
+        },
+        error: (err) => {
+          console.log(err)
+        }
       })
   }
 
   register(): void {
     this.http
-      .post<UserResponseInterface>('https://api.realworld.io/api/users', {
+      .post<UserResponseInterface>(`${environment.baseApiUrl}/users`, {
         user: {
           username: 'any_name',
           email: 'any@mail.com',

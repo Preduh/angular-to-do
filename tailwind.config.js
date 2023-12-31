@@ -2,7 +2,11 @@
 module.exports = {
   content: ['./src/app/**/*.{html,ts}'],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        'inconsolata': ['Inconsolata', 'monospace'],
+      },
+    },
   },
   plugins: []
 }

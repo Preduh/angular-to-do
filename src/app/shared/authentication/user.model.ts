@@ -7,8 +7,8 @@ export interface UserInterface {
 }
 
 export interface UserLoginRequestInterface {
-  email: string
-  password: string
+  email: string | undefined
+  password: string | undefined
 }
 
 export interface UserRegisterRequestInterface {

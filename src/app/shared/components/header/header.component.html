@@ -3,19 +3,18 @@
 >
   <div *ngIf="user">
     <button
-      [mat-menu-trigger-for]="menu"
       class="w-12 h-12 rounded-full bg-violet-700 flex items-center justify-center"
     >
-      <mat-icon class="dark:text-purple-300">person</mat-icon>
+      <!-- <mat-icon class="dark:text-purple-300">person</mat-icon> -->
     </button>
 
-    <mat-menu class="w-48 bg-zinc-500 rounded-lg text-sm" #menu>
+    <menu class="w-48 bg-zinc-500 rounded-lg text-sm">
       <div class="flex items-center">
         <div class="px-3">
           <div
             class="w-12 h-12 rounded-full bg-violet-700 flex items-center justify-center"
           >
-            <mat-icon class="dark:text-purple-300">person</mat-icon>
+            <!-- <mat-icon class="dark:text-purple-300">person</mat-icon> -->
           </div>
         </div>
         <h1 class="text-white text-lg">&#64;{{ user.username }}</h1>
@@ -24,19 +23,19 @@
       <hr class="text-zinc-500 border-zinc-500 mt-2" />
 
       <button mat-menu-item>
-        <mat-icon>check</mat-icon>
+        <!-- <mat-icon>check</mat-icon> -->
         <span>Tasks</span>
       </button>
 
       <button (click)="logout()" mat-menu-item>
-        <mat-icon>logout</mat-icon>
+        <!-- <mat-icon>logout</mat-icon> -->
         <span>Logout</span>
       </button>
-    </mat-menu>
+    </menu>
   </div>
 
   <div *ngIf="!user" class="">
-    <a href="/login" mat-button>Sign in</a>
-    <a href="/register" mat-button>Register</a>
+    <a href="/login">Sign in</a>
+    <a href="/register">Register</a>
   </div>
 </header>

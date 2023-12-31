@@ -1,16 +1,13 @@
 import { CommonModule } from '@angular/common'
-import { Component, Input, inject } from '@angular/core'
-import { MatButtonModule } from '@angular/material/button'
-import { MatIconModule } from '@angular/material/icon'
-import { MatMenuModule } from '@angular/material/menu'
-import { AuthService } from '../../authentication/auth.service'
+import { Component, inject } from '@angular/core'
 import { Router } from '@angular/router'
+import { AuthService } from '../../authentication/auth.service'
 import { UserInterface } from '../../authentication/user.model'
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatMenuModule, MatIconModule, CommonModule, MatButtonModule],
+  imports: [CommonModule],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {

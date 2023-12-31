@@ -6,21 +6,21 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms'
-import { MatButtonModule } from '@angular/material/button'
-import { MatInputModule } from '@angular/material/input'
 import { Router } from '@angular/router'
 import { AuthService } from '../../../../shared/authentication/auth.service'
 import { HeaderComponent } from '../../../../shared/components/header/header.component'
+import { LoginModule } from '../../login.module'
+import { NgIconsModule } from '@ng-icons/core'
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    MatButtonModule,
-    MatInputModule,
     HeaderComponent,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    LoginModule,
+    NgIconsModule
   ],
   templateUrl: './login.component.html'
 })
@@ -32,19 +32,31 @@ export class LoginComponent {
 
   protected form = this.formBuilderService.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]]
+    password: ['', [Validators.required]]
   })
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault()
+
     const formValues = this.form.value
 
-    if (!formValues.email || !formValues.password) {
-      console.log('missing fields')
-    } else {
-      this.authService.login({
+    if (!this.form.valid) {
+      Object.keys(this.form.controls).forEach((key) => {
+        const control = this.form.get(key)
+
+        if (control?.invalid) {
+          control.markAsTouched()
+        }
+      })
+
+      return
+    }
+
+    try {
+      const algo = this.authService.login({
         email: formValues.email,
         password: formValues.password
       })
-    }
+    } catch (error) {}
   }
 }
